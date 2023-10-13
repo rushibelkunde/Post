@@ -1,7 +1,7 @@
 'use client'
 
+import useSWR from 'swr'
 import { useState, useEffect } from "react"
-
 import PromptCard from "./PromptCard"
 
 const PromptCardList = ({data, handleTagClick})=>{
