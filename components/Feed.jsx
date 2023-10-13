@@ -1,6 +1,6 @@
 'use client'
 
-import useSWR from 'swr'
+
 import { useState, useEffect } from "react"
 import PromptCard from "./PromptCard"
 
@@ -24,6 +24,10 @@ const Feed = () => {
 
   const [searchText, setSearchText] = useState("")
 
+ 
+
+  
+
   const [posts, setPosts] = useState([])
   const [searchPosts, setSearchPosts] = useState([])
 
@@ -46,24 +50,23 @@ const Feed = () => {
 
   useEffect(()=>{
 
-    const fetcher = (...args) => fetch(...args).then((res) => res.json())
-    const { data, error } = useSWR('/api/prompt', fetcher)
-    setPosts(data)
-    // const fetchPosts = async()=>{
-    //   const response = await fetch('/api/prompt', {
-    //     cache: "no-store"
-    //   })
-    //   const data = await response.json();
-    //   setPosts(data)
-    // }
+  
+    const fetchPosts = async()=>{
+      const response = await fetch('/api/prompt', {
+        cache: "no-store"
+      })
+      const data = await response.json();
+      setPosts(data)
+    }
 
-    // fetchPosts()
+    fetchPosts()
 
 
   },[])
 
   return (
     <section className="feed">
+      
       <form className="relative w-full flex-center">
         <input type="text" 
         placeholder="Search"
