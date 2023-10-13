@@ -46,15 +46,19 @@ const Feed = () => {
 
   useEffect(()=>{
 
-    const fetchPosts = async()=>{
-      const response = await fetch('/api/prompt', {
-        cache: "no-store"
-      })
-      const data = await response.json();
-      setPosts(data)
-    }
+    const fetcher = (...args) => fetch(...args).then((res) => res.json())
+    const { data, error } = useSWR('/api/prompt', fetcher)
+    setPosts(data)
+    // const fetchPosts = async()=>{
+    //   const response = await fetch('/api/prompt', {
+    //     cache: "no-store"
+    //   })
+    //   const data = await response.json();
+    //   setPosts(data)
+    // }
 
-    fetchPosts()
+    // fetchPosts()
+
 
   },[])
 
