@@ -36,18 +36,16 @@ Before you begin, ensure you have met the following requirements:
 ## Getting Started
 
 1. Clone this repository.
+```bash
+git clone https://github.com/rushibelkunde/Post
+```
 2. Install the project dependencies:
 
 ```bash
 npm install
+```
 
-1. Set up your environment variables (see Configuration).
-2. Run the application in development mode:
-
-```bash
-npm install
-
-##Configuration
+## Configuration
 Create a .env.local file in the project root and add the following environment variables:
 
 ```bash
@@ -55,31 +53,23 @@ NEXTAUTH_URL=http://localhost:3000
 MONGODB_URI=your-mongodb-uri
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
 
 For more information on how to obtain Google OAuth credentials, refer to the NextAuth.js documentation.
 
-##File Structure
-post-app/
-├── components/        # React components
-├── pages/             # Next.js pages
-├── public/            # Public assets
-├── lib/               # Utility functions
-├── styles/            # CSS styles
-└── ...
+## Usage
+- Register and log in using your Google account.
+- Create, edit, and delete posts.
+- Search for posts using the search feature.
 
-##Usage
--Register and log in using your Google account.
--Create, edit, and delete posts.
--Search for posts using the search feature.
-
-##Authentication
+## Authentication
 User authentication is implemented using NextAuth.js. The Google provider is used for authentication. Users can log in with their Google accounts.
 
-##Database
+## Database
 MongoDB is used to store user and post data. Make sure to set the MONGODB_URI environment variable with your MongoDB connection string.
 
-##Deployment
+## Deployment
 You can deploy this application to your preferred hosting platform. Make sure to set the environment variables in your production environment, and secure your credentials.
 
-##License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
