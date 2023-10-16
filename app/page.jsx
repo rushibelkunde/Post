@@ -1,5 +1,4 @@
 import Feed from "@components/Feed"
-import GetPosts from "./GetPosts"
 
 
 const Home = () => {
@@ -19,9 +18,7 @@ const Home = () => {
             </p>
 
 
-        <Feed>
-            {GetPosts}
-        </Feed>
+        <Feed/>
         </section>
     )
 }

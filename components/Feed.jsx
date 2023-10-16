@@ -2,22 +2,29 @@
 
 
 import { useState, useEffect } from "react"
+import PromptCard from "./PromptCard"
 
-import PromptCardList from "./PromptCardList"
+const PromptCardList = ({data, handleTagClick})=>{
 
+  return(
+    <div className="mt-16 prompt_layout">
+      {data.map((post)=>(
+        <PromptCard 
+        key={post._id}
+        post={post}
+        handleTagClick = {handleTagClick}
+        />
+      ))}
+    </div>
+  )
 
+}
 
-
-
-const Feed = (GetPosts) => {
-
-  
+const Feed = () => {
 
   const [searchText, setSearchText] = useState("")
   const [posts, setPosts] = useState([])
   const [searchPosts, setSearchPosts] = useState([])
-
- 
 
   
 
@@ -36,22 +43,24 @@ const Feed = (GetPosts) => {
 
   },[searchText])
 
-  // useEffect(()=>{
-    
-  //   const fetchData = async()=>{
-  //     const Posts = await getPosts()
-  //     setPosts(Posts)
-  //   }
+  useEffect(()=>{
 
-  //   fetchData()
+  
+    const fetchPosts = async()=>{
+      const response = await fetch('/api/prompt', {
+        cache: "no-store"
+      })
+      const data = await response.json();
+      setPosts(data)
+    }
 
-  // },[])
+    fetchPosts()
+
+
+  },[])
 
   return (
     <section className="feed">
-
-  
-      
       
       <form className="relative w-full flex-center">
         <input type="text" 
@@ -63,10 +72,10 @@ const Feed = (GetPosts) => {
         />
       </form>
 
-      {/* <PromptCardList
+      <PromptCardList
       data={ searchText? searchPosts: posts}
-      /> */}
-      <GetPosts/>
+      handleTagClick ={()=> {}}
+      />
 
     </section>
   )
