@@ -1,31 +1,23 @@
 'use client'
 
-import useSWR from 'swr'
+
 import { useState, useEffect } from "react"
-import PromptCard from "./PromptCard"
 
-const PromptCardList = ({data, handleTagClick})=>{
+import PromptCardList from "./PromptCardList"
 
-  return(
-    <div className="mt-16 prompt_layout">
-      {data.map((post)=>(
-        <PromptCard 
-        key={post._id}
-        post={post}
-        handleTagClick = {handleTagClick}
-        />
-      ))}
-    </div>
-  )
 
-}
 
-const Feed = () => {
+
+
+const Feed = (GetPosts) => {
+
+  
 
   const [searchText, setSearchText] = useState("")
-
   const [posts, setPosts] = useState([])
   const [searchPosts, setSearchPosts] = useState([])
+
+ 
 
   
 
@@ -44,26 +36,23 @@ const Feed = () => {
 
   },[searchText])
 
-  useEffect(()=>{
+  // useEffect(()=>{
+    
+  //   const fetchData = async()=>{
+  //     const Posts = await getPosts()
+  //     setPosts(Posts)
+  //   }
 
-    const fetcher = (...args) => fetch(...args).then((res) => res.json())
-    const { data, error } = useSWR('/api/prompt', fetcher)
-    setPosts(data)
-    // const fetchPosts = async()=>{
-    //   const response = await fetch('/api/prompt', {
-    //     cache: "no-store"
-    //   })
-    //   const data = await response.json();
-    //   setPosts(data)
-    // }
+  //   fetchData()
 
-    // fetchPosts()
-
-
-  },[])
+  // },[])
 
   return (
     <section className="feed">
+
+  
+      
+      
       <form className="relative w-full flex-center">
         <input type="text" 
         placeholder="Search"
@@ -74,10 +63,10 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList
+      {/* <PromptCardList
       data={ searchText? searchPosts: posts}
-      handleTagClick ={()=> {}}
-      />
+      /> */}
+      <GetPosts/>
 
     </section>
   )
