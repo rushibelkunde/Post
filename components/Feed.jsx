@@ -5,15 +5,18 @@ import { useState, useEffect } from "react"
 import PromptCard from "./PromptCard"
 
 
+
 const PromptCardList = ({data, handleTagClick})=>{
 
+  
+
   return(
-    <div className="mt-16 prompt_layout">
+    <div className="prompt_layout mt-16 ">
       {data.map((post)=>(
         <PromptCard 
         key={post._id}
         post={post}
-        handleTagClick = {handleTagClick}
+        handleTagClick = {()=>handleTagClick(post.tag)}
         />
       ))}
     </div>
@@ -48,9 +51,25 @@ const Feed = () => {
 
   const fetchPosts = async()=>{
 
-    const response = await fetch("/api/prompt")
+    const response = await fetch("/api/prompt",{
+      next:{
+        revalidate: 10
+      }
+    })
     const data = await response.json()
+    console.log(data)
     setPosts(data)
+  }
+
+  const handleTagClick = (tag)=>{
+    console.log(tag)
+    setSearchText(tag)
+  }
+
+  const handleReset = (e)=>{
+    e.preventDefault()
+    setSearchText("")
+
   }
 
   
@@ -59,11 +78,10 @@ const Feed = () => {
     fetchPosts()
     setLoading(false)
     
-    
   },[])
 
   return (
-    <section className="feed">
+    <section className="feed ">
       
       <form className="relative w-full flex-center">
         <input type="text" 
@@ -73,6 +91,7 @@ const Feed = () => {
         required
         className="search_input peer"
         />
+        {searchText?<button className=" -mx-6" onClick={handleReset}>X</button>:""}
       </form>
 
       {loading? 
@@ -87,7 +106,8 @@ const Feed = () => {
  :
       <PromptCardList
       data={ searchText? searchPosts: posts}
-      handleTagClick ={()=> {}}
+      handleTagClick ={handleTagClick}
+      setSearchText= {setSearchText}
       />}
 
     </section>

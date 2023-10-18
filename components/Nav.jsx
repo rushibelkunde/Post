@@ -19,7 +19,7 @@ const Nav = () => {
         setupProviders()
     },[])
   return (
-    <nav className="flex justify-center items-center flex-between w-screen p-3 px-6  mb-16 pt-3 bg-black text-white">
+    <nav className="flex w-full  justify-center items-center flex-between p-3 px-6  mb-16 pt-3 bg-black text-white">
         <Link href="/" className=" flex gap-2">
             <p className=" font-semibold text-xl text-white">Post</p>
         </Link>
@@ -28,11 +28,11 @@ const Nav = () => {
             {session?.user? 
             <div className=" flex gap-3 md:gap-5">
                 <Link href={"/create-prompt"} className="black_btn">
-                    Create Post
+                    Create-Post
                     </Link>
                 <button type="button" onClick={signOut}
                 className="black_btn">
-                    Sign Out
+                    Signout
 
                 </button>
 

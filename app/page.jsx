@@ -7,7 +7,7 @@ const Home = () => {
 
             <h1 className="head_text text-center">
                 POST 
-                <br className="max-md:hidden" />
+                
                 <span className="blue_gradient text-center">
                     Anything
                 </span>
