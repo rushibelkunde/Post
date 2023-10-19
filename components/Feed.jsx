@@ -51,11 +51,7 @@ const Feed = () => {
 
   const fetchPosts = async()=>{
 
-    const response = await fetch("/api/prompt",{
-      next:{
-        revalidate: 10
-      }
-    })
+    const response = await fetch("/api/prompt")
     const data = await response.json()
     console.log(data)
     setPosts(data)
@@ -75,8 +71,14 @@ const Feed = () => {
   
 
   useEffect(()=>{
-    fetchPosts()
-    setLoading(false)
+
+    const timeout = setTimeout(()=>{
+      fetchPosts()
+      setLoading(false)
+    },2000)
+    return ()=> {
+      clearTimeout(timeout)
+    }
     
   },[])
 
