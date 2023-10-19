@@ -29,9 +29,6 @@ const MyProfile = () => {
     const handleEdit = async (post)=>{
       router.push(`/update-prompt?id=${post._id}`)
 
-
-
-
     }
 
     const handleDelete = async (post)=>{
@@ -41,9 +38,11 @@ const MyProfile = () => {
           method: "DELETE"
         })
         if(response.ok){
+          console.log("deleted")
           const filteredPosts = posts.filter((p)=>(
-            p._id === post._id
+            p._id !== post._id
           ))
+          console.log(filteredPosts)
     
           setPosts(filteredPosts)
 
