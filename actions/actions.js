@@ -3,7 +3,7 @@ import Prompt from "@models/prompt";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
-
+export const dynamic = 'force-dynamic'
 export const fetchPosts = async () => {
 
         await connectToDB()
