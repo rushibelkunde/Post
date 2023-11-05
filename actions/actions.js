@@ -1,4 +1,4 @@
-"use server"
+
 import Prompt from "@models/prompt";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
@@ -21,20 +21,24 @@ export const fetchPosts = async () => {
         // return posts
 }
 
-export const toggleLike = async (userId, postId)=> {
+export const toggleLike = async (userId, postId , y)=> {
     await connectToDB()
     const Post = await Prompt.findById(postId)
     const isLike = Post.likes.includes(userId)
-    if(isLike){
-        Post.likes.pull(userId)
+
+    if(y){
+        if(isLike){
+            Post.likes.pull(userId)
+        }
+        else{
+            Post.likes.push(userId)
+        }
     }
-    else{
-        Post.likes.push(userId)
-    }
+    
     Post.save()
     
 
-    return { isLike, count: Post.likes.length }
+    return { isLike, count: Post.likes.length}
 }
 
 

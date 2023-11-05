@@ -20,7 +20,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
 
   const handleLike = async (userId, postId) => {
-    const { isLike, count } = await toggleLike(userId, postId)
+    const { isLike, count } = await toggleLike(userId, postId, true)
     setIsLike(isLike)
     setLikes(count)
 
@@ -35,7 +35,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   useEffect(() => {
 
     const fetchLike = async () => {
-      const { isLike, count } = await toggleLike(session?.user?.id, post._id)
+      const { isLike, count } = await toggleLike(session?.user?.id, post._id, false)
 
       setIsLike(isLike)
 
