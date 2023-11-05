@@ -1,6 +1,6 @@
 
 
-import mongoose, { Schema, model, models } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const promtSchema = new Schema({
     creator: {
@@ -25,7 +25,6 @@ const promtSchema = new Schema({
     
 })
 
-const Prompt = models.Prompt || model('Prompt',
-promtSchema)
+const Prompt = mongoose.models.Prompt || mongoose.model('Prompt', promtSchema)
 
 export default Prompt

@@ -13,15 +13,15 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const router = useRouter()
   const [copied, setCopied] = useState("")
   const [likes, setLikes] = useState(post.likes.length)
-  const [isLiked, setIsLike] = useState("")
+  const [isLiked, setIsLike] = useState(false)
   const { data: session } = useSession()
   const pathName = usePathname()
 
 
 
   const handleLike = async (userId, postId) => {
-    const { isLike, count } = await toggleLike(userId, postId, true)
-    setIsLike(isLike)
+    const {  count } = await toggleLike(userId, postId, true)
+    setIsLike((prev)=> !prev)
     setLikes(count)
 
   }
@@ -32,15 +32,12 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     setTimeout(() => setCopied(""), 3000)
   }
 
+  const fetchLike = async () => {
+    const { isLike } = await toggleLike(session?.user?.id, post._id, false)
+    setIsLike(isLike)
+  }
+
   useEffect(() => {
-
-    const fetchLike = async () => {
-      const { isLike, count } = await toggleLike(session?.user?.id, post._id, false)
-
-      setIsLike(isLike)
-
-
-    }
     fetchLike()
   }, [])
   return (
@@ -99,7 +96,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       {session?.user ?
         <div className="flex gap-2">
           <button onClick={() => handleLike(session?.user?.id, post._id)}>
-            {isLiked ? <ThumbUpOutlinedIcon /> : <ThumbUpIcon color="error" />}
+            {isLiked ?  <ThumbUpIcon color="error" /> : <ThumbUpOutlinedIcon />}
 
           </button>
           <br />
