@@ -14,7 +14,14 @@ const promtSchema = new Schema({
     tag:{
         type: String,
         required: [true, 'Tag is required']
-    }
+    },
+
+    likes: [
+        {
+        type: String
+        }
+        
+    ]
     
 })
 

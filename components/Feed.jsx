@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react"
 import PromptCard from "./PromptCard"
-
+import { fetchPosts } from "@actions/actions"
 
 
 const PromptCardList = ({data, handleTagClick})=>{
@@ -26,13 +26,12 @@ const PromptCardList = ({data, handleTagClick})=>{
 
 const Feed = () => {
 
+  
   const [searchText, setSearchText] = useState("")
   const [posts, setPosts] = useState([])
   const [searchPosts, setSearchPosts] = useState([])
 
   const [loading, setLoading] = useState(true)
-
-  
 
   useEffect(()=>{
 
@@ -49,12 +48,21 @@ const Feed = () => {
 
   },[searchText])
 
-  const fetchPosts = async()=>{
+  const fetchData = async ()=>{
 
-    const response = await fetch("/api/prompt")
-    const data = await response.json()
-    console.log(data)
-    setPosts(data)
+    const serverPosts = await fetchPosts()
+    setPosts(JSON.parse(serverPosts))
+    setSearchPosts(JSON.parse(serverPosts))
+
+    // const response = await fetch("/api/prompt")
+    // const data = await response.json()
+    // console.log(data)
+    // setPosts(data)
+    // // const posts = await fetchPosts()
+    // // console.log("server", posts)
+    // setSearchPosts(posts)
+
+    
   }
 
   const handleTagClick = (tag)=>{
@@ -72,13 +80,15 @@ const Feed = () => {
 
   useEffect(()=>{
 
+    
     const timeout = setTimeout(()=>{
-      fetchPosts()
+      fetchData()
       setLoading(false)
     },2000)
     return ()=> {
       clearTimeout(timeout)
     }
+   
     
   },[])
 

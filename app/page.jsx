@@ -1,7 +1,9 @@
 import Feed from "@components/Feed"
 
 
-const Home = () => {
+const Home = async () => {
+
+
     return (
         <section className="w-full flex-center flex-col">
 
@@ -16,9 +18,9 @@ const Home = () => {
                 Post is an open-source Web-App, Where You can Create Posts about Anything
 
             </p>
+            
 
-
-        <Feed/>
+        <Feed />
         </section>
     )
 }
