@@ -9,7 +9,9 @@ export const metadata = {
     description: "Post Anything"
 }
 
-const RootLayout = ({children}) => {
+const RootLayout =({children}) => {
+
+
   return (
     <html lang='en'>
         <body>
