@@ -1,7 +1,10 @@
 import Feed from "@components/Feed"
-
+import { Suspense } from "react"
+import { fetchPosts } from "@actions/actions"
 
 const Home = async () => {
+
+    const serverPosts = await fetchPosts()
 
 
     return (
@@ -19,8 +22,9 @@ const Home = async () => {
 
             </p>
             
-
-        <Feed />
+        
+        <Feed serverPosts={serverPosts}/>
+        
         </section>
     )
 }

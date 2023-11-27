@@ -9,7 +9,7 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { toggleLike } from "@actions/actions"
 import { useRouter } from "next/navigation"
 
-const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+const PromptCard = ({post, handleTagClick, handleEdit, handleDelete }) => {
   const router = useRouter()
   const [copied, setCopied] = useState("")
   const [likes, setLikes] = useState(post.likes.length)
@@ -19,9 +19,10 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
 
 
-  const handleLike = async (userId, postId) => {
-    const {  count } = await toggleLike(userId, postId, true)
-    setIsLike((prev)=> !prev)
+  const handleLike = async (postId) => {
+    const {  isLike, count } = await toggleLike( postId, true)
+    // setIsLike((prev)=> !prev)
+    setIsLike(isLike)
     setLikes(count)
 
   }
@@ -33,7 +34,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   }
 
   const fetchLike = async () => {
-    const { isLike } = await toggleLike(session?.user?.id, post._id, false)
+    const { isLike } = await toggleLike( post._id, false)
     setIsLike(isLike)
   }
 
@@ -82,7 +83,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         {post.tag}
       </p>
 
-      {session?.user.id === post.creator._id &&
+      {session?.user?.id === post.creator._id &&
         pathName === '/profile' && (
           <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
             <p className="font-inter text-sm green_gradient cursor-pointer"
@@ -95,7 +96,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
       {session?.user ?
         <div className="flex gap-2">
-          <button onClick={() => handleLike(session?.user?.id, post._id)}>
+          <button onClick={() => handleLike( post._id)}>
             {isLiked ?  <ThumbUpIcon color="error" /> : <ThumbUpOutlinedIcon />}
 
           </button>
