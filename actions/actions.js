@@ -7,6 +7,7 @@ import { authOptions } from "@app/api/auth/[...nextauth]/route";
 import { unstable_noStore as noStore } from "next/cache";
 
 export const fetchPosts = async () => {
+        noStore()
         await connectToDB()
         const posts = await Prompt.find({}).populate(
             'creator'
@@ -15,6 +16,7 @@ export const fetchPosts = async () => {
 }
 
 export const toggleLike = async ( postId , y)=> {
+    noStore()
 
     const session = await getServerSession(authOptions)
     await connectToDB()
@@ -34,7 +36,7 @@ export const toggleLike = async ( postId , y)=> {
     }
     Post.save()
 
-    noStore()
+    
     return{ isLike, count: Post.likes.length}
 }
 
