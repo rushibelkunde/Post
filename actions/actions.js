@@ -5,6 +5,8 @@ import { connectToDB } from "@utils/database";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@app/api/auth/[...nextauth]/route";
 
+export const dynamic = "force-dynamic"
+
 
 export const fetchPosts = async () => {
         await connectToDB()
@@ -33,6 +35,7 @@ export const toggleLike = async ( postId , y)=> {
         }
     }
     Post.save()
+
 
     return{ isLike, count: Post.likes.length}
 }
