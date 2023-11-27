@@ -33,14 +33,14 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete }) => {
     setTimeout(() => setCopied(""), 3000)
   }
 
-  const fetchLike = async () => {
-    const { isLike } = JSON.parse(await toggleLike( post._id, false))
-    setIsLike(isLike)
-  }
+  // const fetchLike = async () => {
+  //   const { isLike } = await toggleLike( post._id, false)
+  //   setIsLike(isLike)
+  // }
 
-  useEffect(() => {
-    fetchLike()
-  }, [])
+  // useEffect(() => {
+  //   fetchLike()
+  // }, [])
   return (
 
     <div className="prompt_card">
