@@ -34,7 +34,7 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete }) => {
   }
 
   const fetchLike = async () => {
-    const { isLike } = await toggleLike( post._id, false)
+    const { isLike } = JSON.parse(await toggleLike( post._id, false))
     setIsLike(isLike)
   }
 

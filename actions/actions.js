@@ -33,8 +33,8 @@ export const toggleLike = async ( postId , y)=> {
         }
     }
     Post.save()
-    
-    return { isLike, count: Post.likes.length}
+
+    return JSON.stringify({ isLike, count: Post.likes.length})
 }
 
 
