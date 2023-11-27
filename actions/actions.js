@@ -27,16 +27,15 @@ export const toggleLike = async ( postId , y)=> {
         console.log(userID)
         if(isLike){
             Post.likes.pull(userID)
-            isLike = Post.likes.includes(userID)
+            
         }
         else{
             Post.likes.push(userID)
-            isLike = Post.likes.includes(userID)
+            
         }
     }
     Post.save()
-
-    
+    isLike = Post.likes.includes(userID)
     return{ isLike, count: Post.likes.length}
 }
 
