@@ -4,9 +4,7 @@ import User from "@models/user";
 import { connectToDB } from "@utils/database";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@app/api/auth/[...nextauth]/route";
-
-export const dynamic = "force-dynamic"
-
+import { unstable_noStore as noStore } from "next/cache";
 
 export const fetchPosts = async () => {
         await connectToDB()
@@ -36,7 +34,7 @@ export const toggleLike = async ( postId , y)=> {
     }
     Post.save()
 
-
+    noStore()
     return{ isLike, count: Post.likes.length}
 }
 
