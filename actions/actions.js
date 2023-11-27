@@ -3,6 +3,8 @@ import Prompt from "@models/prompt";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
+import { unstable_noStore as noStore } from "next/cache";
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@app/api/auth/[...nextauth]/route";
 
@@ -33,6 +35,9 @@ export const toggleLike = async ( postId , y)=> {
     }
     isLike = Post.likes.includes(userID)
     Post.save()
+
+    noStore()
+    
     return { isLike, count: Post.likes.length}
 }
 
